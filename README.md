@@ -21,9 +21,14 @@ Ce TP a pour but de vous familiariser avec les bases de la conception d'infrastr
 - Construire l'image Docker localement 
 - Tester l'image en exécutant le conteneur localement pour vérifier que l'application fonctionne correctement.
 
+### Partie 2: Veille Techno
 
+- Lire, analyser et résumer ces trois articles:
+    - https://www.softfluent.fr/blog/microservices/
+    - https://datamyte.com/blogs/infrastructure-scaling/
+    - https://www.redhat.com/en/blog/cloud-vs-on-premises
 
-### Partie 2 : Déploiement sur AWS avec Fargate
+### Partie 3 : Déploiement sur AWS avec Fargate
 
 #### Préparation de l'Environnement AWS :
 Création de l’environnement et d’un VPC pour votre projet.
@@ -45,7 +50,7 @@ Création de l’environnement et d’un VPC pour votre projet.
 
 
 
-### Partie 3 : Mise en Place de la Sécurité et des Groupes de Droits
+### Partie 4 : Mise en Place de la Sécurité et des Groupes de Droits
 
 #### Création des Security Groups :
 Configurer un security group pour le service ECS, limitant l'accès aux seuls ports nécessaires (par exemple, 80 pour HTTP ou 443 pour HTTPS).
