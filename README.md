@@ -29,7 +29,7 @@ Défi : Assurer l'accès Internet pour les mises à jour et dépendances, tout e
 Solution : En plaçant la NAT Gateway dans le subnet public, j'ai permis aux conteneurs ECS dans le subnet privé d’accéder à Internet sans être exposés.
 
 
-### Défis et Solutions
+## Défis et Solutions
 Compréhension de la Logique de Déploiement avec AWS : J'ai travaillé sur un schéma pour visualiser et comprendre le déploiement d'une application sur AWS avec ECS, en me concentrant sur les éléments essentiels comme le VPC, les sous-réseaux, les groupes de sécurité, et le Load Balancer.
 
 Gestion des Permissions et Sécurité : Le schéma m'a permis d’explorer comment AWS et les groupes de sécurité pourraient être utilisés pour contrôler les accès de manière sécurisée.
