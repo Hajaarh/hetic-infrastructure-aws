@@ -1,63 +1,33 @@
-# Conception et Déploiement d'une Infrastructure Cloud Sécurisée avec AWS
+# Déploiement de mon Application Node.js sur AWS avec ECS et ALB
 
-## Objectifs :
-Ce TP a pour but de vous familiariser avec les bases de la conception d'infrastructures en utilisant des technologies de conteneurisation et de déploiement sur le cloud. Vous apprendrez à conteneuriser une application web, à la déployer sur AWS, et à mettre en place des mesures de sécurité de base, telles que la gestion des droits d'accès.
+## Introduction :
+Ce document détaille les étapes que j'ai suivies pour déployer mon application Node.js sur AWS en utilisant un cluster ECS, un Load Balancer (ALB) et une architecture sécurisée en VPC. Il présente également les défis rencontrés et les solutions apportées.
 
-
-### Partie 0: Récupération du code source
-- Créer un fork de ce repo: https://github.com/choucroute-volante/hetic-infra-2
-- Y créer un fichier binome.md en y ajoutant les noms et prénoms de vos binômes, puis commit et push ces modifications.
-
-
-### Partie 1 : Conteneurisation d'une Application Web
-
-#### Récupération et lancement de l’app :
-- Lancer l’application et vérifier son bon fonctionnement
-
-#### Création du Dockerfile :
-- Écrire un Dockerfile pour conteneuriser l'application.
-
-#### Construction et Test de l'Image :
-- Construire l'image Docker localement 
-- Tester l'image en exécutant le conteneur localement pour vérifier que l'application fonctionne correctement.
-
-### Partie 2: Veille Techno
-
-- Lire, analyser et résumer ces trois articles:
-    - https://www.softfluent.fr/blog/microservices/
-    - https://datamyte.com/blogs/infrastructure-scaling/
-    - https://www.redhat.com/en/blog/cloud-vs-on-premises
-
-### Partie 3 : Déploiement sur AWS avec Fargate
-
-#### Préparation de l'Environnement AWS :
-Création de l’environnement et d’un VPC pour votre projet.
-
-#### Création d'un Cluster ECS :
-- Utiliser Amazon ECS ou Fargate pour créer un cluster.
-- Définir une Task Definition avec les paramètres suivants :
-    - Image Docker (téléchargée sur Amazon ECR ou Docker Hub).
-    - Nombre de conteneurs à exécuter et allocation des ressources (CPU, mémoire).
-    - Configuration des variables d'environnement nécessaires.
-
-#### Déploiement de l'Application :
-- Déployer la Task dans le cluster ECS.
-- Configurer un service ECS pour gérer la disponibilité de l'application (scaling, détection de panne).
-
-#### Configuration du Load Balancer (ALB) :
-- Créer une Application Load Balancer (ALB) et configurer les règles d'écoute.
-- Associer le service ECS à l'ALB pour gérer le trafic vers les conteneurs
+###  Étapes de Déploiement
+Étape 1 : Création du VPC et des Sous-réseaux
+J'ai créé un VPC pour isoler mon réseau, en ajoutant un subnet public pour le Load Balancer et un subnet privé pour le service ECS, où l’application est hébergée.
+Étape 2 : Création de l'Image Docker
+À partir de l'image node:18.20.2, j'ai configuré un Dockerfile qui définit l'environnement de travail, installe les dépendances, et expose le port 3000 pour l'application.
+Défi : Optimiser le Dockerfile pour assurer une installation rapide et une taille d’image réduite.
+Solution : J'ai utilisé COPY package*.json pour copier uniquement les fichiers de dépendance d'abord, afin que le cache Docker soit plus efficace lors de modifications mineures du code.
+Étape 3 : Déploiement dans ECS et Configuration de la Task
+J'ai créé un cluster ECS et une Task Definition, où j’ai spécifié l’image Docker, les ressources CPU/mémoire, et les variables d'environnement nécessaires.
+Défi : Allouer les bonnes ressources sans compromettre les performances.
+Solution : J’ai testé différentes configurations pour obtenir un bon équilibre entre performance et coût.
+Étape 4 : Configuration de l’ALB
+J'ai mis en place un ALB pour diriger le trafic HTTP/HTTPS vers le service ECS.
+Défi : Configurer les règles d'écoute pour garantir que le trafic est redirigé correctement vers le port exposé (3000) de l’application.
+Solution : J'ai configuré les règles d'écoute pour faire correspondre le trafic entrant aux instances de l'application en interne.
+Étape 5 : Sécurité et Accès Internet pour les Ressources Privées
+J'ai configuré des groupes de sécurité pour limiter l'accès aux seuls ports nécessaires (80 et 443 pour le ALB) et mis en place une NAT Gateway dans le subnet public.
+Défi : Assurer l'accès Internet pour les mises à jour et dépendances, tout en sécurisant les ressources en interne.
+Solution : En plaçant la NAT Gateway dans le subnet public, j'ai permis aux conteneurs ECS dans le subnet privé d’accéder à Internet sans être exposés.
 
 
+### Défis et Solutions
+Compréhension de la Logique de Déploiement avec AWS : J'ai travaillé sur un schéma pour visualiser et comprendre le déploiement d'une application sur AWS avec ECS, en me concentrant sur les éléments essentiels comme le VPC, les sous-réseaux, les groupes de sécurité, et le Load Balancer.
+Gestion des Permissions et Sécurité : Le schéma m'a permis d’explorer comment AWS et les groupes de sécurité pourraient être utilisés pour contrôler les accès de manière sécurisée.
+Allocation des Ressources et Architecture Réseau : J'ai étudié comment les ressources CPU et mémoire, ainsi que l’isolation des sous-réseaux, peuvent être organisés pour équilibrer sécurité, coût et performance dans un contexte AWS, sans effectuer de tests ou configurations directes.
 
-### Partie 4 : Mise en Place de la Sécurité et des Groupes de Droits
-
-#### Création des Security Groups :
-Configurer un security group pour le service ECS, limitant l'accès aux seuls ports nécessaires (par exemple, 80 pour HTTP ou 443 pour HTTPS).
-
-
-
-## Livrables :
-Le Dockerfile et tout autre fichier de configuration nécessaire.
-Les captures d'écran ou les liens prouvant le bon fonctionnement de l'application déployée sur AWS.
-Un document décrivant les différentes étapes suivies, les défis rencontrés et les solutions apportées.
+#### Conclusion :
+Ce travail m’a permis de mieux comprendre la logique de déploiement d'une application sur AWS en explorant les concepts clés tels que la configuration réseau, la sécurité, et la gestion des ressources dans ECS. La création du schéma m’a aidé à visualiser les étapes et à structurer une architecture cohérente, sans aller jusqu’à la configuration réelle. Cette approche me donne une base solide pour aborder un déploiement complet à l’avenir.
