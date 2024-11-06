@@ -36,7 +36,7 @@ Gestion des Permissions et Sécurité : Le schéma m'a permis d’explorer comme
 
 Allocation des Ressources et Architecture Réseau : J'ai étudié comment les ressources CPU et mémoire, ainsi que l’isolation des sous-réseaux, peuvent être organisés pour équilibrer sécurité, coût et performance dans un contexte AWS, sans effectuer de tests ou configurations directes.
 
-#### Conclusion :
+### Conclusion :
 Ce travail m’a permis de mieux comprendre la logique de déploiement d'une application sur AWS en explorant les concepts clés tels que la configuration réseau, la sécurité, et la gestion des ressources dans ECS. La création du schéma m’a aidé à visualiser les étapes et à structurer une architecture cohérente, sans aller jusqu’à la configuration réelle. Cette approche me donne une base solide pour aborder un déploiement complet à l’avenir.
 
 HAILAF Hajar
