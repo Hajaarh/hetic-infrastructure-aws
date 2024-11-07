@@ -10,8 +10,8 @@ J'ai créé un VPC pour isoler mon réseau, en ajoutant un subnet public pour le
 
 ## Étape 2 : Création de l'Image Docker
 À partir de l'image node:18.20.2, j'ai configuré un Dockerfile qui définit l'environnement de travail, installe les dépendances, et expose le port 3000 pour l'application.
-# Défi : Optimiser le Dockerfile pour assurer une installation rapide et une taille d’image réduite.
-# Solution : J'ai utilisé COPY package*.json pour copier uniquement les fichiers de dépendance d'abord, afin que le cache Docker soit plus efficace lors de modifications mineures du code.
+Défi : Optimiser le Dockerfile pour assurer une installation rapide et une taille d’image réduite.
+Solution : J'ai utilisé COPY package*.json pour copier uniquement les fichiers de dépendance d'abord, afin que le cache Docker soit plus efficace lors de modifications mineures du code.
 
 ## Étape 3 : Déploiement dans ECS et Configuration de la Task
 J'ai créé un cluster ECS et une Task Definition, où j’ai spécifié l’image Docker, les ressources CPU/mémoire, et les variables d'environnement nécessaires.
