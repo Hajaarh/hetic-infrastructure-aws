@@ -1,5 +1,5 @@
 # Déploiement de mon Application Node.js sur AWS avec ECS et ALB
-![Schéma du déploiement AWS](/app/public/images/schemaaws.png)
+![Schéma du déploiement AWS](/public/images/schemaaws%20(2).png)
 
 ## Introduction :
 Ce document détaille les étapes que j'ai suivies pour déployer mon application Node.js sur AWS en utilisant un cluster ECS, un Load Balancer (ALB) et une architecture sécurisée en VPC. Il présente également les défis rencontrés et les solutions apportées.
