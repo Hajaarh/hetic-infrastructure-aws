@@ -15,13 +15,10 @@ Solution : J'ai utilisé COPY package*.json pour copier uniquement les fichiers 
 
 ## Étape 3 : Déploiement dans ECS et Configuration de la Task
 J'ai créé un cluster ECS et une Task Definition, où j’ai spécifié l’image Docker, les ressources CPU/mémoire, et les variables d'environnement nécessaires.
-Défi : Allouer les bonnes ressources sans compromettre les performances.
-Solution : J’ai testé différentes configurations pour obtenir un bon équilibre entre performance et coût.
 
 ## Étape 4 : Configuration de l’ALB
 J'ai mis en place un ALB pour diriger le trafic HTTP/HTTPS vers le service ECS.
 Défi : Configurer les règles d'écoute pour garantir que le trafic est redirigé correctement vers le port exposé (3000) de l’application.
-Solution : J'ai configuré les règles d'écoute pour faire correspondre le trafic entrant aux instances de l'application en interne.
 
 ## Étape 5 : Sécurité et Accès Internet pour les Ressources Privées
 J'ai configuré des groupes de sécurité pour limiter l'accès aux seuls ports nécessaires (80 et 443 pour le ALB) et mis en place une NAT Gateway dans le subnet public.
