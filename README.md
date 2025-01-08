@@ -1,4 +1,4 @@
-# Déploiement de mon Application Node.js sur AWS avec ECS et ALB
+# Déploiement d'une application Node.js sur AWS avec ECS et ALB
 ![Schéma du déploiement AWS](app/public/images/schema_infra.png)
 
 ## Introduction :
